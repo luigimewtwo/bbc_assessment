@@ -1,0 +1,109 @@
+openapi: 3.0.0
+info:
+  title: Test API
+  version: 1.0.0
+  description: |
+    Simple read-only API exposing endpoints for vulnerabilities, SBOMs, and systems.
+servers:
+  - url: https://api.example.local
+    description: Example server
+
+tags:
+  - name: Vulnerabilities
+  - name: SBOMs
+  - name: Systems
+
+paths:
+  /vulnerabilities:
+    get:
+      tags: [Vulnerabilities]
+      summary: List vulnerabilities
+      description: Returns a list of vulnerability records.
+      responses:
+        "200":
+          description: Success
+        "401":
+          description: Invalid API key provided
+        "403":
+          description: Requested resource does not exist
+
+  /vulnerabilities/{vuln_id}:
+    get:
+      tags: [Vulnerabilities]
+      summary: Get a vulnerability by ID
+      parameters:
+        - in: path
+          name: vuln_id
+          schema:
+            type: string
+          required: true
+          description: UUID ID of the vulnerability to get
+      responses:
+        "200":
+          description: Success
+        "401":
+          description: Invalid API key provided
+        "403":
+          description: Requested resource does not exist
+
+  /sboms:
+    get:
+      tags: [SBOMs]
+      summary: List SBOMs
+      responses:
+        "200":
+          description: Success
+        "401":
+          description: Invalid API key provided
+        "403":
+          description: Requested resource does not exist
+
+  /sboms/{sbom_id}:
+    get:
+      tags: [SBOMs]
+      summary: Get an SBOM by ID
+      parameters:
+        - in: path
+          name: sbom_id
+          schema:
+            type: string
+          required: true
+          description: UUID ID of the sbom to get
+      responses:
+        "200":
+          description: Success
+        "401":
+          description: Invalid API key provided
+        "403":
+          description: Requested resource does not exist
+
+  /systems:
+    get:
+      tags: [Systems]
+      summary: List systems
+      responses:
+        "200":
+          description: Success
+        "401":
+          description: Invalid API key provided
+        "403":
+          description: Requested resource does not exist
+
+  /systems/{system_id}:
+    get:
+      tags: [Systems]
+      summary: Get a system by ID
+      parameters:
+        - in: path
+          name: system_id
+          schema:
+            type: string
+          required: true
+          description: UUID ID of the system to get
+      responses:
+        "200":
+          description: Success
+        "401":
+          description: Invalid API key provided
+        "403":
+          description: Requested resource does not exist
