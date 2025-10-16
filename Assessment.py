@@ -1,6 +1,14 @@
 import requests
+import json
 
-response = requests.get("https://d2ssns4w4hvcti.cloudfront.net/openapi.yaml",
+response = requests.get("https://d2ssns4w4hvcti.cloudfront.net/sboms",
                         headers={"X-API-Key": "c0f729ac225ae545358ac0b0dbaea776"}
                         )
-print (response.text)
+
+data = response.json()
+
+id_lines = [f" {item['id']}" for item in data if "id" in item]
+
+with open("sboms.txt", "a") as file:
+    for  id in id_lines:
+        file.write(id + "\n")
